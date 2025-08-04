@@ -25,7 +25,8 @@ class DeclaracaoVariaveis
 		
 		int y = 10, x = 20;
 		int z = y + x;
-		Console.WriteLine(z);			
+		Console.WriteLine(z);
+		
 		
 	}	
 }
