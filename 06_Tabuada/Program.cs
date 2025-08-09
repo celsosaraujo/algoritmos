@@ -6,10 +6,17 @@ namespace _06_Tabuada
     {
         static void Main(string[] args)
         {
-            int multiplicando, produto;
+            int multiplicando = 0, produto;
+            bool digitacaoInvalida = false;
 
-            Console.WriteLine("Digite um número inteiro");
-            multiplicando = int.Parse( Console.ReadLine() );
+            // ! negação: inverte o valor booleano
+            // !false = true
+            // !true = false
+            while ( !digitacaoInvalida )
+            { 
+                Console.WriteLine("Digite um número inteiro");
+                digitacaoInvalida = int.TryParse(Console.ReadLine(), out  multiplicando);
+            }
 
             Console.WriteLine("TABUADA DO {0}", multiplicando);
             for ( int multiplicador = 1; multiplicador <= 10 ; multiplicador++)
