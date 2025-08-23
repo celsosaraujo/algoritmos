@@ -59,7 +59,12 @@ namespace _09_Calendario
                 {
                     if (calendario[semana, diaSemana] != 0)
                     {
+                        if(calendario[semana, diaSemana] == 11 || diaSemana == 0)
+                            Console.ForegroundColor = ConsoleColor.Red;
+
                         Console.Write(calendario[semana, diaSemana].ToString("D2") + "\t");
+
+                        Console.ResetColor();
                     }
                     else
                     {
