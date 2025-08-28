@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -122,8 +123,84 @@ namespace _09_Calendario
                 feriados[indice++] = 8;
                 feriados[indice++] = 25;
             }
+            DateTime domingoDePascoa = DomingoDePascoa(ano);
             
+            DateTime carnaval = domingoDePascoa.AddDays(-47);
+            DateTime sextaFeiraSanta = domingoDePascoa.AddDays(-2);
+            DateTime CorpuChrist = domingoDePascoa.AddDays(60);
+
+            if (domingoDePascoa.Month == mes)
+                feriados[indice++] = domingoDePascoa.Day;
+
+            if (carnaval.Month == mes)
+                feriados[indice++] = carnaval.Day;
+
+            if (sextaFeiraSanta.Month == mes)
+                feriados[indice++] = sextaFeiraSanta.Day;
+
+            if (CorpuChrist.Month == mes)
+                feriados[indice++] = CorpuChrist.Day;
+
+            Array.Sort(feriados);
+
             return feriados;
+        }
+        
+        public static DateTime DomingoDePascoa( int ano)
+        {
+            DateTime domingoDePascoa;
+            int X = 0, Y = 0, a, b, c, d, g, dia, mes;
+
+            if(ano <= 1699)
+            {
+                X = 22;
+                Y = 2;
+            }
+            else if(ano <= 1799)
+            {
+                X = 23;
+                Y = 3;
+            }
+            else if(ano <= 1899)
+            {
+                X = 24;
+                Y = 4;
+            }
+            else if(ano <= 2099)
+            {
+                X = 24;
+                Y = 5;
+            }
+            else if(ano <= 2199)
+            {
+                X = 24;
+                Y = 6;
+            }
+            else if(ano <= 2299){
+                X = 24;
+                Y = 7;
+            }
+
+            a = ano % 19;
+            b = ano % 4;
+            c = ano % 7;
+            d = (19 * a + X) % 30;
+            g = (2 * b + 4 * c + 6 * d + Y) % 7;
+
+            if((d + g) > 9)
+            {
+                dia = (d + g - 9);
+                mes = 4;
+            }
+            else 
+            {
+                dia = (d + g + 22);
+                mes = 3;
+            }
+
+            domingoDePascoa = new DateTime(ano, mes, dia);
+
+            return domingoDePascoa;
         }
     }
 }
